@@ -1,0 +1,32 @@
+# QL Tracker Configuration
+# This file configures the behavior of the @track decorator
+
+[tracker]
+# Enable or disable logging entirely
+enable_logging = true
+
+# Enable pretty printing with rich formatting
+pretty_print = true
+
+# Log to file instead of console
+log_to_file = false
+
+# Path to log file (only used if log_to_file = true)
+log_file_path = "tracker.log"
+
+# Log level (INFO, DEBUG, WARNING, ERROR)
+log_level = "INFO"
+
+[queue]
+# Maximum number of events to batch before flushing
+max_batch_size = 10
+
+# Time interval in seconds to flush events (even if batch is not full)
+flush_interval_secs = 5
+
+[storage]
+# Storage backend type (jsonl, sqlite, etc.)
+backend = "remote"
+
+# Output path for storage files
+output_path = "logs/ql-tracker.jsonl" 
