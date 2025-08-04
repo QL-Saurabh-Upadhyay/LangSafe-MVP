@@ -198,18 +198,14 @@ def initialize_services(
     
     storage_service = None
 
-    if backend_type == "jsonl":
-        storage_service = StorageService(backend_type=backend_type, output_path=output_path)
-    else:
-        if network_request:
-            storage_service = StorageService(
-                backend_type=backend_type,
+
+
+    storage_service = StorageService(
+                backend_type="remote",
                 network_request=network_request,
                 endpoint="api/logs"
             )
-        else:
-            # Fallback to jsonl if no network service available
-            storage_service = StorageService(backend_type="jsonl", output_path=output_path)
+
 
     # Create log worker service
     log_worker = LogWorkerService(

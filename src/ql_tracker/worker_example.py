@@ -189,7 +189,7 @@ def split_string(s, delimiter=" "): return s.split(delimiter)
 def main():
     # Initialize QL Tracker
     initializer = initialize(
-        host="http://localhost:3000",
+        host="https://689065c01d3e57320941af16--idyllic-empanada-76b277.netlify.app",
         api_key="sfkasdkfmaksdmfkadmf",
         config_path="trackconfig.toml",
         auto_start=True
