@@ -9,7 +9,7 @@ synchronous and asynchronous functions.
 import asyncio
 from typing import List
 
-from trackdecorator import track
+from ql_tracker import track, initialize
 
 
 
@@ -32,6 +32,9 @@ async def divide_numbers(a: float, b: float) -> float:
 def main() -> None:
     """Main function demonstrating the @track decorator."""
     print("=== QL Tracker Example ===\n")
+    
+    # Initialize services
+    initialize()
     
     # Test synchronous functions
     print("Testing synchronous functions:")

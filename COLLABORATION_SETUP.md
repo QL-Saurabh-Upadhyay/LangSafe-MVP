@@ -14,6 +14,10 @@ cd ql_tracker
 ### 2. Install Dependencies
 
 ```bash
+# Create virtual environment (required for modern Python)
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
 # Install the package in development mode
 pip install -e .
 
@@ -44,9 +48,9 @@ result = my_function(5, 3)
    cd ql_tracker
    ```
 
-2. **Create a virtual environment (recommended):**
+2. **Create a virtual environment (required for modern Python):**
    ```bash
-   python -m venv venv
+   python3 -m venv venv
    source venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
 

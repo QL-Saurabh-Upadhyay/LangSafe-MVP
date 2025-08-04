@@ -41,6 +41,10 @@ def install_dependencies():
         
     except subprocess.CalledProcessError as e:
         print(f"❌ Error installing dependencies: {e}")
+        print("💡 Try creating a virtual environment first:")
+        print("   python3 -m venv venv")
+        print("   source venv/bin/activate  # On Windows: venv\\Scripts\\activate")
+        print("   Then run this script again.")
         return False
     
     return True
@@ -90,6 +94,10 @@ def test_import():
         return True
     except ImportError as e:
         print(f"❌ Import error: {e}")
+        print("💡 Make sure you're in a virtual environment and the package is installed:")
+        print("   python3 -m venv venv")
+        print("   source venv/bin/activate")
+        print("   pip install -e .")
         return False
 
 
@@ -123,6 +131,8 @@ def run_quick_test():
         
     except Exception as e:
         print(f"❌ Test failed: {e}")
+        print("💡 This might be due to missing dependencies or configuration issues.")
+        print("   Check the logs for more details.")
         return False
 
 

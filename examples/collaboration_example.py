@@ -18,10 +18,10 @@ def setup_tracker():
     """Initialize the QL Tracker services."""
     print("🔧 Setting up QL Tracker...")
     
-    # Initialize with optional API key and host
+    # Initialize with optional API key and host (using None for local-only mode)
     initializer = initialize(
-        api_key="your-api-key-here",  # Optional: Replace with your actual API key
-        host="https://api.example.com",  # Optional: Replace with your actual host
+        api_key=None,  # Optional: Replace with your actual API key
+        host=None,  # Optional: Replace with your actual host (None for local-only)
         config_path="trackconfig.toml"  # Optional: Path to your config file
     )
     
@@ -105,7 +105,7 @@ async def demonstrate_async_tracking():
     print(f"Fetched data: {result}")
 
 
-def demonstrate_class_tracking():
+async def demonstrate_class_tracking():
     """Demonstrate class method tracking."""
     print("\n🏗️ Class Method Tracking Examples:")
     print("-" * 50)
@@ -117,10 +117,7 @@ def demonstrate_class_tracking():
     print(f"Processed batch: {result}")
     
     # Async method tracking
-    async def run_async_method():
-        return await processor.async_process_batch(["HELLO", "WORLD", "PYTHON"])
-    
-    async_result = asyncio.run(run_async_method())
+    async_result = await processor.async_process_batch(["HELLO", "WORLD", "PYTHON"])
     print(f"Async processed batch: {async_result}")
 
 
@@ -191,7 +188,7 @@ async def main():
     # Step 2: Demonstrate various tracking scenarios
     demonstrate_basic_tracking()
     await demonstrate_async_tracking()
-    demonstrate_class_tracking()
+    await demonstrate_class_tracking()
     demonstrate_error_tracking()
     
     # Step 3: Show configuration options

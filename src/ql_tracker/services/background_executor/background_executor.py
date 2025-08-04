@@ -188,21 +188,28 @@ def initialize_services(
 
     event_queue = EventQueue()
 
-    # Create Network Request service
-    network_request = NetworkRequestService(
-        base_url=host,
-        api_key=api_key
-    )
-    storage_service= None
+    # Create Network Request service (only if host is provided)
+    network_request = None
+    if host:
+        network_request = NetworkRequestService(
+            base_url=host,
+            api_key=api_key
+        )
+    
+    storage_service = None
 
     if backend_type == "jsonl":
         storage_service = StorageService(backend_type=backend_type, output_path=output_path)
     else:
-        storage_service = StorageService(
-            backend_type=backend_type,
-            network_request=network_request,
-            endpoint="api/logs"
-        )
+        if network_request:
+            storage_service = StorageService(
+                backend_type=backend_type,
+                network_request=network_request,
+                endpoint="api/logs"
+            )
+        else:
+            # Fallback to jsonl if no network service available
+            storage_service = StorageService(backend_type="jsonl", output_path=output_path)
 
     # Create log worker service
     log_worker = LogWorkerService(
@@ -215,7 +222,8 @@ def initialize_services(
     executor = get_background_executor()
 
     executor.add_service(event_queue)
-    executor.add_service(network_request)
+    if network_request:
+        executor.add_service(network_request)
     executor.add_service(storage_service)
     executor.add_service(log_worker)
 

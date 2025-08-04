@@ -10,7 +10,7 @@ import asyncio
 import time
 from typing import List
 
-from trackdecorator import track, initialize, shutdown, get_stats, get_initializer
+from ql_tracker import track, initialize, shutdown, get_stats, get_initializer
 
 
 @track
