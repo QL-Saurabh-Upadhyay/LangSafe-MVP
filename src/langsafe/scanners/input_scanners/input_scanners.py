@@ -13,6 +13,8 @@ from dataclasses import dataclass, asdict
 import torch
 import time
 
+from ql_tracker import track
+
 # PyTorch optimizations
 torch.set_float32_matmul_precision('high')
 import torch._inductor.config
@@ -304,7 +306,7 @@ class LLMFirewall:
 
         except Exception as e:
             logger.error(f"Failed to create {scanner_name} scanner: {str(e)}")
-
+    @track
     def scan_prompt(self, prompt: str) -> Tuple[str, bool, Dict[str, Any]]:
         """Scan prompt through all enabled scanners"""
         results = {}
@@ -369,6 +371,7 @@ class LLMFirewall:
         """Get all scanner configurations"""
         return {name: asdict(config) for name, config in self.scanner_configs.items()}
 
+    @track
     def _process_secrets(self, scanner, prompt: str) -> Tuple[str, bool, float]:
         """Process secrets scanning"""
         try:

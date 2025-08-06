@@ -20,26 +20,31 @@ def get_scan_logs():
 
 # POST /scan
 @router.post("/scan", response_model=ScanResponse)
+@track
 def scan(request: ScanRequest):
-    return scan_input_output(request.input, request.output, request.integration_id)
+    return scan_input_output(request.input, request.output, request.integration_id,firewall)
 
 # GET /logs
 @router.get("/logs", response_model=LogsResponse)
+@track
 def get_scan_logs(integration_id: str, status: str, limit: int = 50):
     return get_logs(integration_id, status, limit)
 
 # POST /config/scanners
 @router.post("/config/scanners", response_model=ScannerConfigResponse)
+@track
 def set_scanner_config(request: ScannerConfigRequest):
     return update_scanner_config(request.integration_id, request.scanners)
 
 # GET /scanners
 @router.get("/scanners", response_model=ScannersListResponse)
+@track
 def scanners_list():
     return get_available_scanners()
 
 # WS /ws/events
 @router.websocket("/ws/events")
+@track
 async def websocket_endpoint(websocket: WebSocket, token: str = Query(...)):
     await websocket.accept()
     try:
