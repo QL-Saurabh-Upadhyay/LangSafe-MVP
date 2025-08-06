@@ -5,13 +5,13 @@ from .logic import *
 from ..scanners.input_scanners.input_scanners import LLMFirewall
 
 router = APIRouter(prefix="/v1")
-firewall = LLMFirewall()
+# firewall = LLMFirewall()
 @router.get("/health-check")
 def get_scan_logs():
     return jsonify({
         'status': 'healthy',
         'timestamp': time.time(),
-        'active_scanners': len(firewall.scanners),
+        # 'active_scanners': len(firewall.scanners),
         'service': 'LLM Output Firewall'
     })
 
