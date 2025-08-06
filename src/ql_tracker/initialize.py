@@ -51,7 +51,7 @@ class QLTrackerInitializer:
         self,
         api_key: Optional[str] = None,
         host: Optional[str] = None,
-        config_path: Optional[str] = None
+        config_path: Optional[str] = "trackconfig.toml"
     ) -> 'QLTrackerInitializer':
         """
         Configure the QL Tracker initializer.

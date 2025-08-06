@@ -10,5 +10,7 @@ def setup_ngrok():
         ngrok.set_auth_token(NGROK_AUTH_TOKEN)
         url = ngrok.connect(PORT, "http")
         print(f" * ngrok tunnel: {url}")
+        return url.public_url
     else:
         print(" * Skipping ngrok, no NGROK_API_KEY set.")
+        return ""

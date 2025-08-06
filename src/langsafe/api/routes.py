@@ -1,12 +1,15 @@
 from fastapi import APIRouter, Query, WebSocket, WebSocketDisconnect
 from langsafe.api.models import *
+from ql_tracker import track
 from .logic import *
 from ..scanners.input_scanners.input_scanners import LLMFirewall
 import time
 
 router = APIRouter(prefix="/v1")
 firewall = LLMFirewall()
+
 @router.get("/health-check")
+@track
 def get_scan_logs():
     return {
         'status': 'healthy',
