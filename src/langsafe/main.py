@@ -1,0 +1,18 @@
+import os
+
+from fastapi import FastAPI
+from langsafe.api.routes import router
+from config import setup_ngrok, PORT
+import uvicorn
+
+from langsafe.preload_asset import preload_asset
+from langsafe.scanners.input_scanners.input_scanners import LLMFirewall
+
+app = FastAPI(title="Langsafe Scanner")
+app.include_router(router)
+preload_asset()
+firewall = LLMFirewall()
+
+if __name__ == "__main__":
+    setup_ngrok()
+    uvicorn.run("main:app", host="0.0.0.0", port=PORT, reload=True)
