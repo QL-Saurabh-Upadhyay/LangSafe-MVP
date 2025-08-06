@@ -2,10 +2,10 @@ import jsonify
 from fastapi import APIRouter, Query, WebSocket, WebSocketDisconnect
 from langsafe.api.models import *
 from .logic import *
-from ..main import firewall
+from ..scanners.input_scanners.input_scanners import LLMFirewall
 
 router = APIRouter(prefix="/v1")
-
+firewall = LLMFirewall()
 @router.get("/health-check")
 def get_scan_logs():
     return jsonify({
